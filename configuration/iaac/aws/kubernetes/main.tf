@@ -64,12 +64,16 @@ resource "kubernetes_service_account" "example" {
   secret {
     name = "${kubernetes_secret.example.metadata.0.name}"
   }
+  
 }
 
 resource "kubernetes_secret" "example" {
   metadata {
-    name = "terraform-example"
+    annotations = {
+      "kubernetes.io/service-account.name" = "terraform-example"
+    }
   }
+   type = "kubernetes.io/service-account-token"
 }
 
 # We will use ServiceAccount to connect to K8S Cluster in CI/CD mode
