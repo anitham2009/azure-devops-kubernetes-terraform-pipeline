@@ -29,7 +29,7 @@ provider "kubernetes" {
  // version                = "~> 1.9"
 }
 
-module "in28minutes-cluster" {
+module "anitha-cluster" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_name    = "anitha-cluster"
   cluster_version = "1.17"
