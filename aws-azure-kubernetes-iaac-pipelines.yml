@@ -25,3 +25,9 @@ steps:
     backendServiceAWS: 'terraform-aws-service-connection'
     backendAWSBucketName: 'terraform-backend-state-anitha123'
     backendAWSKey: 'terraform-backend.tfstate'
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'aws'
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)//configuration/iaac/aws/kubernetes'
+    environmentServiceNameAWS: 'terraform-aws-service-connection'
