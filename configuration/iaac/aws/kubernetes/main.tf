@@ -69,6 +69,7 @@ resource "kubernetes_service_account" "example" {
 
 resource "kubernetes_secret" "example" {
   metadata {
+    name = "terraform-example"
     annotations = {
       "kubernetes.io/service-account.name" = "terraform-example"
     }
