@@ -29,10 +29,10 @@ provider "kubernetes" {
  // version                = "~> 1.9"
 }
 
-module "anitha-cluster" {
+module "my-cluster" {
   source          = "terraform-aws-modules/eks/aws"
   version         = "17.24.0"
-  cluster_name    = "anitha-cluster"
+  cluster_name    = "my-cluster"
   cluster_version = "1.24"
   subnets         = ["subnet-0b900a5420bbd4acf", "subnet-0d691af63605263b9", "subnet-09f0ff785ea9fbc41"] #CHANGE # Donot choose subnet from us-east-1e
   #subnets = data.aws_subnet_ids.subnets.ids
@@ -50,11 +50,11 @@ module "anitha-cluster" {
 }
 
 data "aws_eks_cluster" "cluster" {
-  name = module.anitha-cluster.cluster_id
+  name = module.my-cluster.cluster_id
 }
 
 data "aws_eks_cluster_auth" "cluster" {
-  name = module.anitha-cluster.cluster_id
+  name = module.my-cluster.cluster_id
 }
 
 
