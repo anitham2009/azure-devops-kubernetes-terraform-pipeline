@@ -72,7 +72,15 @@ resource "kubernetes_cluster_role_binding" "example" {
   }
   subject {
     kind      = "ServiceAccount"
-    name      = "default"
+    name      = "my-serviceaccount"
+    namespace = "default"
+  }
+  
+}
+
+resource "kubernetes_secret" "example" {
+  metadata {
+    name = "terraform-example"
     namespace = "default"
   }
 }
