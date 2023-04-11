@@ -57,6 +57,20 @@ data "aws_eks_cluster_auth" "cluster" {
   name = module.my-cluster.cluster_id
 }
 
+resource "kubernetes_service_account" "example" {
+  metadata {
+    name = "terraform-example"
+  }
+  secret {
+    name = "${kubernetes_secret.example.metadata.0.name}"
+  }
+}
+
+resource "kubernetes_secret" "example" {
+  metadata {
+    name = "terraform-example"
+  }
+}
 
 # We will use ServiceAccount to connect to K8S Cluster in CI/CD mode
 # ServiceAccount needs permissions to create deployments 
@@ -72,17 +86,10 @@ resource "kubernetes_cluster_role_binding" "example" {
   }
   subject {
     kind      = "ServiceAccount"
-    name      = "my-serviceaccount"
+    name      = "terraform-example"
     namespace = "default"
   }
   
-}
-
-resource "kubernetes_secret" "example" {
-  metadata {
-    name = "terraform-example"
-    namespace = "default"
-  }
 }
 
 # Needed to set the default region
